@@ -9,18 +9,19 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
-            if (id.includes('react-syntax-highlighter')) {
+            // Split out the heavy syntax highlighter deps
+            if (id.includes('react-syntax-highlighter') || id.includes('refractor')) {
               return 'vendor-syntax-highlighter';
             }
             if (id.includes('lucide-react')) {
               return 'vendor-lucide';
             }
-            // Group React core together to avoid circular deps
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom') || id.includes('scheduler')) {
+            // Group all React ecosystem together
+            if (id.includes('react') || id.includes('scheduler') || id.includes('prop-types')) {
               return 'vendor-react';
             }
-            // Put other large libs in their own chunk if needed, otherwise 'vendor'
-            return 'vendor'; 
+            // Everything else
+            return 'vendor';
           }
         },
       },

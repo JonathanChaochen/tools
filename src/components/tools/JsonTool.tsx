@@ -5,6 +5,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useClipboard } from '../../hooks/useClipboard';
 import { useKeyboardShortcut } from '../../hooks/useKeyboardShortcut';
+import { useTheme } from '../../hooks/useTheme';
 import { getTextStats, formatNumber } from '../../utils/textStats';
 
 const examples = [
@@ -58,17 +59,8 @@ export const JsonTool: React.FC = () => {
   const [output, setOutput] = useState('');
   const [error, setError] = useState<string | null>(null);
   const { copy, paste, copied } = useClipboard();
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
-
-  // Listen for theme changes
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
+  const { theme } = useTheme();
+  const isDarkMode = theme === 'dark';
 
   const handlePaste = async () => {
     const text = await paste();
