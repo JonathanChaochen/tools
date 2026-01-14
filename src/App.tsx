@@ -3,6 +3,7 @@ import { Home } from './pages/Home';
 import { JsonFormatter } from './pages/JsonFormatter';
 import { MarkdownPreview } from './pages/MarkdownPreview';
 import { Base64Converter } from './pages/Base64Converter';
+import { TimestampConverter } from './pages/TimestampConverter';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/json-formatter" element={<JsonFormatter />} />
         <Route path="/markdown-preview" element={<MarkdownPreview />} />
         <Route path="/base64-converter" element={<Base64Converter />} />
+        <Route path="/timestamp-converter" element={<TimestampConverter />} />
       </Routes>
     </BrowserRouter>
   );

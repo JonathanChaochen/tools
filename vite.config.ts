@@ -16,10 +16,6 @@ export default defineConfig({
             if (id.includes('lucide-react')) {
               return 'vendor-lucide';
             }
-            // Group all React ecosystem together
-            if (id.includes('react') || id.includes('scheduler') || id.includes('prop-types')) {
-              return 'vendor-react';
-            }
             // Everything else
             return 'vendor';
           }

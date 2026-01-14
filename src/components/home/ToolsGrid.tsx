@@ -1,8 +1,13 @@
-import React from 'react';
-import { Braces, FileText, ArrowLeftRight } from 'lucide-react';
+import { Braces, FileText, ArrowLeftRight, Clock } from 'lucide-react';
 import { ToolCard } from '../ui/ToolCard';
 
 const tools = [
+  {
+    icon: Clock,
+    title: 'Timestamp Converter',
+    description: 'Convert Unix timestamps, ISO 8601 strings and dates across timezones.',
+    href: '/timestamp-converter',
+  },
   {
     icon: Braces,
     title: 'JSON Formatter',
