@@ -46,6 +46,9 @@ export const Header: React.FC = () => {
                 onClick={() => setIsToolsOpen(!isToolsOpen)}
                 onBlur={() => setTimeout(() => setIsToolsOpen(false), 200)}
                 className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
+                aria-expanded={isToolsOpen}
+                aria-haspopup="true"
+                aria-label="Tools menu"
               >
                 Tools
                 <ChevronDown size={16} className={`transition-transform ${isToolsOpen ? 'rotate-180' : ''}`} />
@@ -53,12 +56,17 @@ export const Header: React.FC = () => {
               
               {/* Dropdown Menu */}
               {isToolsOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-2 z-50">
+                <div 
+                  className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-2 z-50"
+                  role="menu"
+                  aria-label="Available tools"
+                >
                   {tools.map((tool) => (
                     <a
                       key={tool.href}
                       href={tool.href}
                       className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                      role="menuitem"
                     >
                       {tool.name}
                     </a>

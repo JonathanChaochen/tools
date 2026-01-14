@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Clipboard, RefreshCw, Copy, AlertCircle, ArrowRightLeft } from 'lucide-react';
+import { Clipboard, RefreshCw, Copy, AlertCircle, ArrowRightLeft, Download, CheckCircle } from 'lucide-react';
 import { encodeBase64, decodeBase64 } from '../../utils/base64';
+import { useClipboard } from '../../hooks/useClipboard';
 
 type Mode = 'encode' | 'decode';
 
@@ -9,6 +10,7 @@ export const Base64Tool: React.FC = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const { copy, paste, copied } = useClipboard();
 
   const handleModeSwitch = (newMode: Mode) => {
     setMode(newMode);
@@ -18,11 +20,11 @@ export const Base64Tool: React.FC = () => {
   };
 
   const handlePaste = async () => {
-    try {
-      const text = await navigator.clipboard.readText();
+    const text = await paste();
+    if (text) {
       setInput(text);
       setError(null);
-    } catch {
+    } else {
       setError('Failed to read clipboard.');
     }
   };
@@ -48,11 +50,21 @@ export const Base64Tool: React.FC = () => {
 
   const handleCopy = async () => {
     if (!output) return;
-    try {
-      await navigator.clipboard.writeText(output);
-    } catch {
+    const success = await copy(output);
+    if (!success) {
       setError('Failed to copy result.');
     }
+  };
+
+  const handleDownload = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = mode === 'encode' ? 'encoded.txt' : 'decoded.txt';
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -129,18 +141,43 @@ export const Base64Tool: React.FC = () => {
           <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
             {mode === 'encode' ? 'Base64 Output' : 'Plain Text Result'}
           </label>
-          <button
-            onClick={handleCopy}
-            disabled={!output}
-            className={`flex items-center text-sm font-medium transition-colors ${
-              output 
-                ? 'text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 cursor-pointer' 
-                : 'text-gray-400 cursor-not-allowed'
-            }`}
-          >
-            <Copy size={16} className="mr-1.5" />
-            Copy Result
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleDownload}
+              disabled={!output}
+              className={`flex items-center text-sm font-medium transition-colors ${
+                output 
+                  ? 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 cursor-pointer' 
+                  : 'text-gray-400 cursor-not-allowed'
+              }`}
+              aria-label="Download result"
+            >
+              <Download size={16} className="mr-1.5" />
+              Download
+            </button>
+            <button
+              onClick={handleCopy}
+              disabled={!output}
+              className={`flex items-center text-sm font-medium transition-colors ${
+                output 
+                  ? 'text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 cursor-pointer' 
+                  : 'text-gray-400 cursor-not-allowed'
+              }`}
+              aria-label="Copy to clipboard"
+            >
+              {copied ? (
+                <>
+                  <CheckCircle size={16} className="mr-1.5" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Copy size={16} className="mr-1.5" />
+                  Copy
+                </>
+              )}
+            </button>
+          </div>
         </div>
         <div className="relative w-full min-h-[9rem] max-h-[20rem] overflow-auto p-4 font-mono text-sm bg-gray-50 dark:bg-gray-950/50 border border-gray-200 dark:border-gray-800 rounded-lg text-gray-900 dark:text-gray-100 break-all whitespace-pre-wrap">
           {output ? (
