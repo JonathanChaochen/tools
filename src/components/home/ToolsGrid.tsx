@@ -7,19 +7,19 @@ const tools = [
     icon: Braces,
     title: 'JSON Formatter',
     description: 'Clean, format, and validate your JSON data instantly with syntax highlighting.',
-    href: '#json-formatter',
+    href: '/json-formatter',
   },
   {
     icon: FileText,
     title: 'Markdown Previewer',
     description: 'Real-time markdown rendering to preview your documentation and README files.',
-    href: '#markdown-preview',
+    href: '/markdown-preview',
   },
   {
     icon: ArrowLeftRight,
     title: 'Base64 Converter',
     description: 'Quickly encode or decode strings and files to and from Base64 format.',
-    href: '#base64-converter',
+    href: '/base64-converter',
   },
 ];
 
