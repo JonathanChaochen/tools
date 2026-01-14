@@ -154,14 +154,14 @@ export const JsonTool: React.FC = () => {
         {/* Keyboard Shortcuts Info */}
         <div className="flex items-start gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-sm text-blue-800 dark:text-blue-300">
           <Info size={16} className="mt-0.5 flex-shrink-0" />
-          <div>
+          <div className="leading-relaxed">
             <strong>Keyboard shortcuts:</strong> <kbd className="px-1.5 py-0.5 bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 rounded text-xs font-mono">Cmd/Ctrl + Enter</kbd> to format, <kbd className="px-1.5 py-0.5 bg-white dark:bg-gray-800 border border-blue-300 dark:border-blue-700 rounded text-xs font-mono">Cmd/Ctrl + K</kbd> to clear
           </div>
         </div>
 
         {/* Input Section */}
         <div className="space-y-2">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap justify-between items-center gap-2">
             <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Input</label>
             <div className="flex items-center gap-3">
               <span className="text-xs text-gray-500">
@@ -204,7 +204,7 @@ export const JsonTool: React.FC = () => {
 
         {/* Output Section */}
         <div className="space-y-2">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-wrap justify-between items-center gap-2">
             <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Result</label>
             <div className="flex items-center gap-3">
               {output && (
