@@ -232,9 +232,30 @@ export const JwtTool: React.FC = () => {
                  Claims Explanation
               </h3>
               <ul className="space-y-2 text-sm">
-                 {exp && <li className="grid grid-cols-[40px_1fr]"><span className="font-mono font-bold text-blue-700 dark:text-blue-400">exp</span> <span className="text-gray-700 dark:text-gray-300">Expires at {formatTime(exp).abs}</span></li>}
-                 {iat && <li className="grid grid-cols-[40px_1fr]"><span className="font-mono font-bold text-blue-700 dark:text-blue-400">iat</span> <span className="text-gray-700 dark:text-gray-300">Issued at {formatTime(iat).abs}</span></li>}
-                 {nbf && <li className="grid grid-cols-[40px_1fr]"><span className="font-mono font-bold text-blue-700 dark:text-blue-400">nbf</span> <span className="text-gray-700 dark:text-gray-300">Not valid before {formatTime(nbf).abs}</span></li>}
+                 {exp && (
+                   <li className="grid grid-cols-[40px_1fr]">
+                     <span className="font-mono font-bold text-blue-700 dark:text-blue-400">exp</span>
+                     <span className="text-gray-700 dark:text-gray-300">
+                       Expires at <a href={`/timestamp-converter?t=${exp}`} className="text-blue-600 hover:underline" title="Click to convert">{formatTime(exp).abs}</a>
+                     </span>
+                   </li>
+                 )}
+                 {iat && (
+                   <li className="grid grid-cols-[40px_1fr]">
+                     <span className="font-mono font-bold text-blue-700 dark:text-blue-400">iat</span>
+                     <span className="text-gray-700 dark:text-gray-300">
+                       Issued at <a href={`/timestamp-converter?t=${iat}`} className="text-blue-600 hover:underline" title="Click to convert">{formatTime(iat).abs}</a>
+                     </span>
+                   </li>
+                 )}
+                 {nbf && (
+                   <li className="grid grid-cols-[40px_1fr]">
+                     <span className="font-mono font-bold text-blue-700 dark:text-blue-400">nbf</span>
+                     <span className="text-gray-700 dark:text-gray-300">
+                       Not valid before <a href={`/timestamp-converter?t=${nbf}`} className="text-blue-600 hover:underline" title="Click to convert">{formatTime(nbf).abs}</a>
+                     </span>
+                   </li>
+                 )}
                  {payload.iss && <li className="grid grid-cols-[40px_1fr]"><span className="font-mono font-bold text-blue-700 dark:text-blue-400">iss</span> <span className="text-gray-700 dark:text-gray-300">Issuer: {payload.iss}</span></li>}
                  {payload.sub && <li className="grid grid-cols-[40px_1fr]"><span className="font-mono font-bold text-blue-700 dark:text-blue-400">sub</span> <span className="text-gray-700 dark:text-gray-300">Subject: {payload.sub}</span></li>}
                  {payload.aud && <li className="grid grid-cols-[40px_1fr]"><span className="font-mono font-bold text-blue-700 dark:text-blue-400">aud</span> <span className="text-gray-700 dark:text-gray-300">Audience: {payload.aud}</span></li>}

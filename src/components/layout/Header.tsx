@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
               <Terminal className="w-5 h-5 text-white dark:text-gray-900" strokeWidth={2.5} />
             </div>
             <span className="font-bold text-lg tracking-tight text-gray-900 dark:text-white">
-              Chao Chen
+              DevTools
             </span>
           </a>
 

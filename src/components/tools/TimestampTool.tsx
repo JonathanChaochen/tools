@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Copy, CheckCircle, AlertCircle, Calendar } from 'lucide-react';
 import { useClipboard } from '../../hooks/useClipboard';
 import {
@@ -18,7 +19,17 @@ const PRESETS = [
 ];
 
 export const TimestampTool: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [input, setInput] = useState<string>('');
+  
+  // Read 't' param on mount
+  useEffect(() => {
+    const t = searchParams.get('t');
+    if (t) {
+      setInput(t);
+    }
+  }, [searchParams]);
+
   const [parsedDate, setParsedDate] = useState<Date | null>(null);
   const [error, setError] = useState<string | null>(null);
   
