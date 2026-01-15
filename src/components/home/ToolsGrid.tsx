@@ -1,4 +1,4 @@
-import { Braces, FileText, ArrowLeftRight, Clock } from 'lucide-react';
+import { Braces, FileText, ArrowLeftRight, Clock, Search } from 'lucide-react';
 import { ToolCard } from '../ui/ToolCard';
 
 const tools = [
@@ -25,6 +25,12 @@ const tools = [
     title: 'Base64 Converter',
     description: 'Quickly encode or decode strings and files to and from Base64 format.',
     href: '/base64-converter',
+  },
+  {
+    icon: Search,
+    title: 'Regex Playground',
+    description: 'Test regular expressions with live highlighting and capture groups.',
+    href: '/regex-tester',
   },
 ];
 

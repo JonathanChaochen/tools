@@ -11,6 +11,7 @@ export const Header: React.FC = () => {
     { name: 'JSON Formatter', href: '/json-formatter' },
     { name: 'Markdown Previewer', href: '/markdown-preview' },
     { name: 'Base64 Converter', href: '/base64-converter' },
+    { name: 'Regex Playground', href: '/regex-tester' },
   ];
 
   return (
