@@ -1,19 +1,9 @@
 import React from 'react';
-import { Terminal, Moon, Sun, ChevronDown, Search } from 'lucide-react';
+import { Terminal, Moon, Sun, Search } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
 export const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
-  const [isToolsOpen, setIsToolsOpen] = React.useState(false);
-
-  const tools = [
-    { name: 'Timestamp Converter', href: '/timestamp-converter' },
-    { name: 'JSON Formatter', href: '/json-formatter' },
-    { name: 'Markdown Previewer', href: '/markdown-preview' },
-    { name: 'Base64 Converter', href: '/base64-converter' },
-    { name: 'Regex Playground', href: '/regex-tester' },
-    { name: 'JWT Inspector', href: '/jwt-inspector' },
-  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm transition-colors">
@@ -34,11 +24,11 @@ export const Header: React.FC = () => {
             {/* Search Trigger */}
             <button
               onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors text-sm text-gray-500 dark:text-gray-400 border border-transparent hover:border-gray-300 dark:hover:border-gray-600 mr-2"
+              className="flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors text-sm text-gray-500 dark:text-gray-400 border border-transparent hover:border-gray-300 dark:hover:border-gray-600 mr-2"
               aria-label="Search tools"
             >
               <Search size={14} />
-              <span className="mr-1">Search</span>
+              <span className="hidden sm:inline mr-1">Search</span>
               <kbd className="hidden md:inline-flex items-center gap-0.5 font-mono text-[10px] font-medium bg-white dark:bg-gray-950 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-700 text-gray-400">
                 <span className="text-xs">⌘</span>K
               </kbd>
@@ -52,44 +42,6 @@ export const Header: React.FC = () => {
             >
               {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
-
-            {/* Separator */}
-            <div className="h-6 w-px bg-gray-200 dark:bg-gray-800" />
-
-            {/* Tools Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setIsToolsOpen(!isToolsOpen)}
-                onBlur={() => setTimeout(() => setIsToolsOpen(false), 200)}
-                className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors"
-                aria-expanded={isToolsOpen}
-                aria-haspopup="true"
-                aria-label="Tools menu"
-              >
-                Tools
-                <ChevronDown size={16} className={`transition-transform ${isToolsOpen ? 'rotate-180' : ''}`} />
-              </button>
-              
-              {/* Dropdown Menu */}
-              {isToolsOpen && (
-                <div 
-                  className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg py-2 z-50"
-                  role="menu"
-                  aria-label="Available tools"
-                >
-                  {tools.map((tool) => (
-                    <a
-                      key={tool.href}
-                      href={tool.href}
-                      className="block px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                      role="menuitem"
-                    >
-                      {tool.name}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>
