@@ -1,4 +1,4 @@
-import { Braces, FileText, ArrowLeftRight, Clock, Search } from 'lucide-react';
+import { Braces, FileText, ArrowLeftRight, Clock, Search, Shield } from 'lucide-react';
 import { ToolCard } from '../ui/ToolCard';
 
 const tools = [
@@ -31,6 +31,12 @@ const tools = [
     title: 'Regex Playground',
     description: 'Test regular expressions with live highlighting and capture groups.',
     href: '/regex-tester',
+  },
+  {
+    icon: Shield,
+    title: 'JWT Inspector',
+    description: 'Decode tokens locally with header/payload breakdown and signature validation.',
+    href: '/jwt-inspector',
   },
 ];
 

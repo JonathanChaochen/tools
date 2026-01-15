@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Trash2, AlertCircle, CheckCircle } from 'lucide-react';
+import { Copy, Trash2, AlertCircle, CheckCircle, BookOpen } from 'lucide-react';
 import { useClipboard } from '../../hooks/useClipboard';
+import { RegexCheatsheet } from './regex/RegexCheatsheet';
 
 type MatchGroup = {
   index: number;
@@ -29,6 +30,7 @@ export const RegexTool: React.FC = () => {
   const [matches, setMatches] = useState<MatchResult[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [execTime, setExecTime] = useState<number>(0);
+  const [showCheatsheet, setShowCheatsheet] = useState(false);
   
   const { copy, copied } = useClipboard();
 
@@ -233,7 +235,21 @@ export const RegexTool: React.FC = () => {
         {/* Regex Input Card */}
         <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm p-6 space-y-4">
           <div className="flex justify-between items-center">
-             <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Regular Expression</label>
+             <div className="flex items-center gap-2">
+               <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Regular Expression</label>
+               <button 
+                 onClick={() => setShowCheatsheet(!showCheatsheet)}
+                 className={`ml-3 flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-colors border ${
+                   showCheatsheet 
+                   ? 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-300' 
+                   : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
+                 }`}
+                 title="Toggle Cheatsheet"
+               >
+                 <BookOpen size={14} />
+                 Cheatsheet
+               </button>
+             </div>
              <div className="flex gap-2">
                <button onClick={() => setPreset('email')} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded text-gray-600 dark:text-gray-400 transition-colors">Email</button>
                <button onClick={() => setPreset('url')} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded text-gray-600 dark:text-gray-400 transition-colors">URL</button>
@@ -313,9 +329,27 @@ export const RegexTool: React.FC = () => {
         </div>
       </div>
 
+      {/* Cheatsheet Drawer - Global Fixed Position */}
+      {showCheatsheet && (
+        <>
+           {/* Backdrop */}
+           <div 
+             className="fixed inset-0 bg-black/20 dark:bg-black/50 backdrop-blur-[1px] z-40 transition-opacity" 
+             onClick={() => setShowCheatsheet(false)}
+           />
+           {/* Drawer */}
+           <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-80 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 shadow-2xl transform transition-transform animate-in slide-in-from-right duration-200">
+             <RegexCheatsheet 
+               onClose={() => setShowCheatsheet(false)} 
+               onInsert={(val) => setPattern(pattern + val)}
+             />
+           </div>
+        </>
+      )}
+
       {/* RIGHT COLUMN: Results */}
-      <div className="space-y-6">
-        
+      <div className="space-y-6 relative">
+
         {/* Highlight View */}
         <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm p-6 space-y-4 flex flex-col h-[300px]">
            <div className="flex justify-between items-center">

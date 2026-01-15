@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Moon, Sun, ChevronDown } from 'lucide-react';
+import { Terminal, Moon, Sun, ChevronDown, Search } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
 export const Header: React.FC = () => {
@@ -12,6 +12,7 @@ export const Header: React.FC = () => {
     { name: 'Markdown Previewer', href: '/markdown-preview' },
     { name: 'Base64 Converter', href: '/base64-converter' },
     { name: 'Regex Playground', href: '/regex-tester' },
+    { name: 'JWT Inspector', href: '/jwt-inspector' },
   ];
 
   return (
@@ -30,6 +31,19 @@ export const Header: React.FC = () => {
 
           {/* Navigation - visible on all screens */}
           <div className="flex items-center gap-4">
+            {/* Search Trigger */}
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md transition-colors text-sm text-gray-500 dark:text-gray-400 border border-transparent hover:border-gray-300 dark:hover:border-gray-600 mr-2"
+              aria-label="Search tools"
+            >
+              <Search size={14} />
+              <span className="mr-1">Search</span>
+              <kbd className="hidden md:inline-flex items-center gap-0.5 font-mono text-[10px] font-medium bg-white dark:bg-gray-950 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-700 text-gray-400">
+                <span className="text-xs">⌘</span>K
+              </kbd>
+            </button>
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
