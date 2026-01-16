@@ -38,6 +38,12 @@ const tools = [
     description: 'Decode tokens locally with header/payload breakdown and signature validation.',
     href: '/jwt-inspector',
   },
+  {
+    icon: Clock,
+    title: 'Cron Helper',
+    description: 'Parse, validate, and debug cron expressions with human-readable descriptions.',
+    href: '/cron-helper',
+  },
 ];
 
 export const ToolsGrid: React.FC = () => {

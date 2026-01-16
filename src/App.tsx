@@ -6,6 +6,7 @@ import { Base64Converter } from './pages/Base64Converter';
 import { TimestampConverter } from './pages/TimestampConverter';
 import { RegexTester } from './pages/RegexTester';
 import { JwtInspector } from './pages/JwtInspector';
+import { CronPage } from './pages/CronPage';
 import { CommandPalette } from './components/layout/CommandPalette';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/timestamp-converter" element={<TimestampConverter />} />
         <Route path="/regex-tester" element={<RegexTester />} />
         <Route path="/jwt-inspector" element={<JwtInspector />} />
+        <Route path="/cron-helper" element={<CronPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -69,6 +69,13 @@ export const CommandPalette: React.FC = () => {
       keywords: ['home', 'start', 'index'],
     },
     {
+      id: 'timestamp',
+      label: 'Timestamp Converter',
+      icon: Clock,
+      action: () => navigate('/timestamp-converter'),
+      keywords: ['time', 'date', 'epoch', 'unix'],
+    },
+    {
       id: 'json',
       label: 'JSON Formatter',
       icon: Braces,
@@ -90,13 +97,6 @@ export const CommandPalette: React.FC = () => {
       keywords: ['base64', 'encode', 'decode'],
     },
     {
-      id: 'timestamp',
-      label: 'Timestamp Converter',
-      icon: Clock,
-      action: () => navigate('/timestamp-converter'),
-      keywords: ['time', 'date', 'epoch', 'unix'],
-    },
-    {
       id: 'regex',
       label: 'Regex Playground',
       icon: Search,
@@ -109,6 +109,13 @@ export const CommandPalette: React.FC = () => {
       icon: Shield,
       action: () => navigate('/jwt-inspector'),
       keywords: ['jwt', 'token', 'decode', 'security'],
+    },
+    {
+      id: 'cron',
+      label: 'Cron Helper',
+      icon: Clock,
+      action: () => navigate('/cron-helper'),
+      keywords: ['cron', 'schedule', 'job', 'time'],
     },
     {
       id: 'theme',
